@@ -5,6 +5,10 @@ resolver = "2"
 [workspace.dependencies]
 anyhow = "1.0.82"
 clap = { features = ["derive"], version = "4.5.4" }
+clap-verbosity-flag = "2.2.0"
+colored = "2.1.0"
+concolor-clap = "0.1.0"
+console = "0.15.8"
 reqwest = { features = ["json"], version = "0.12.3" }
 serde = { features = ["derive"], version = "1.0.197" }
 serde_json = "1.0.115"

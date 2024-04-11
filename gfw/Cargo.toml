@@ -1,11 +1,12 @@
 [dependencies]
 cli = { path = "../cli" }
-colored = "2.1.0"
-console = "0.15.8"
-serde_json = "1.0.115"
 tabled = { features = ["ansi"], version = "0.15.0" }
 anyhow.workspace = true
 clap.workspace = true
+clap-verbosity-flag.workspace = true
+colored.workspace = true
+concolor-clap.workspace = true
+console.workspace = true
 reqwest.workspace = true
 serde.workspace = true
 tokio.workspace = true

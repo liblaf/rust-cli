@@ -1,3 +1,5 @@
+mod delay;
+
 use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
@@ -19,6 +21,12 @@ pub struct Proxy {
     pub type_: String,
     pub name: String,
     pub now: Option<String>,
+    pub history: Vec<History>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct History {
+    pub delay: i64,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

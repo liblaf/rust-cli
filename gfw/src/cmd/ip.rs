@@ -1,6 +1,6 @@
 use std::net::IpAddr;
 
-use clap::Args;
+use clap::{ArgAction, Args};
 use colored::{Color, Colorize};
 use console::Emoji;
 use tabled::builder::Builder;
@@ -16,22 +16,22 @@ use crate::api::proxycheckio::Risk;
 pub struct Cmd {
     #[arg()]
     addr: Option<IpAddr>,
-    #[arg(long)]
-    no_risk: bool,
-    #[arg(long)]
-    no_security: bool,
+    #[arg(long, default_value_t = true, action(ArgAction::Set), default_missing_value("true"), num_args(0..=1), require_equals(true))]
+    risk: bool,
+    #[arg(long, default_value_t = true, action(ArgAction::Set), default_missing_value("true"), num_args(0..=1), require_equals(true))]
+    security: bool,
 }
 
 impl Cmd {
     pub async fn run(&self) -> anyhow::Result<()> {
         if let Some(addr) = self.addr {
-            let info = get(Some(addr), None, !self.no_risk, !self.no_security).await?;
+            let info = get(Some(addr), None, self.security, self.risk).await?;
             let table = create_table(&info)?;
             println!("{}", table);
         } else {
-            let info4 = get(None, Some(4), !self.no_risk, !self.no_security).await?;
+            let info4 = get(None, Some(4), self.security, self.risk).await?;
             let mut table: Table = create_table(&info4)?;
-            if let Ok(info6) = get(None, Some(6), !self.no_risk, !self.no_security).await {
+            if let Ok(info6) = get(None, Some(6), self.security, self.risk).await {
                 let table6 = create_table(&info6)?;
                 table.with(Concat::horizontal(table6));
             }
