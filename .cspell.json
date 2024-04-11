@@ -1,0 +1,5 @@
+{
+  "words": ["geoip", "ipapiis", "ipsb", "serde"],
+  "ignorePaths": ["**/*-lock.*", "**/*.lock", "**/.cspell.json"],
+  "allowCompoundWords": true
+}
