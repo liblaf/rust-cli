@@ -1,5 +1,6 @@
 mod api;
 mod cmd;
+mod proc;
 
 use crate::cmd::Cmd;
 use clap::Parser;

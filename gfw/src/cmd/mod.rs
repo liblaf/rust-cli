@@ -1,4 +1,5 @@
 mod ip;
+mod list;
 mod now;
 
 use clap::{Parser, Subcommand};
@@ -20,6 +21,7 @@ pub struct Cmd {
 #[derive(Subcommand)]
 enum SubCmd {
     Ip(ip::Cmd),
+    List(list::Cmd),
     Now(now::Cmd),
 }
 
@@ -39,6 +41,7 @@ impl Cmd {
         self.verbose.init();
         match &self.cmd {
             SubCmd::Ip(cmd) => cmd.run().await,
+            SubCmd::List(cmd) => cmd.run().await,
             SubCmd::Now(cmd) => cmd.run().await,
         }
     }
