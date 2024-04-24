@@ -1,7 +1,6 @@
 TARGETS := gfw
 
-HOST    != rustc --version --verbose | sed --quiet 's/host: //p'
-VERSION != cargo metadata --no-deps --format-version 1 | jq --raw-output '.packages.[0].version'
+HOST != rustc --version --verbose | sed --quiet 's/host: //p'
 
 default: dist
 

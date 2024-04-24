@@ -1,5 +1,16 @@
 {
-  "words": ["geoip", "ipapiis", "ipsb", "serde"],
+  "words": [
+    "bidi",
+    "choco",
+    "commitizen",
+    "coreutils",
+    "indicatif",
+    "ipsb",
+    "liblaf",
+    "nointeraction",
+    "serde",
+    "swatinem"
+  ],
   "ignorePaths": ["**/*-lock.*", "**/*.lock", "**/.cspell.json"],
   "allowCompoundWords": true
 }

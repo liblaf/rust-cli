@@ -28,9 +28,9 @@ impl Cmd {
             } else {
                 Cow::Owned(crate::proc::bw::get::notes("MY_UUID").await?)
             };
-            crate::api::liblaf::get_info_uuid(&uuid).await?
+            crate::api::liblaf::sub::info_by_uuid(&uuid).await?
         } else {
-            crate::api::liblaf::get_info_urls(&self.urls).await?
+            crate::api::liblaf::sub::info_by_urls(&self.urls).await?
         };
         let mut table = Builder::new();
         let table = if self.url {
@@ -44,7 +44,9 @@ impl Cmd {
                 .modify(Columns::single(0), Color::FG_BLUE);
             table
         } else {
-            table.push_record(["Name", "Upload", "Download", "Remain", "Expire"]);
+            table.push_record([
+                "Name", "Upload", "Download", "Usage", "Remain", "Total", "Expire",
+            ]);
             for info in info_list.as_slice() {
                 if let (Some(download), Some(upload), Some(total), Some(expire)) =
                     (info.download, info.upload, info.total, info.expire)
@@ -80,7 +82,9 @@ impl Cmd {
                         &info.name,
                         &format_bytes(upload),
                         &format_bytes(download),
-                        &format_bytes(total - upload - download),
+                        &format_bytes(usage),
+                        &format_bytes(total - usage),
+                        &format_bytes(total),
                         &format_date(expire),
                     ])
                 }
@@ -88,8 +92,9 @@ impl Cmd {
             let mut table = table.build();
             table
                 .with(Style::rounded())
-                .modify(Columns::first(), tabled::settings::Color::FG_BLUE)
-                .modify(Columns::new(1..=3), Alignment::right());
+                .with(Alignment::right())
+                .modify(Columns::first(), Alignment::left())
+                .modify(Columns::first(), tabled::settings::Color::FG_BLUE);
             table
         };
         println!("{}", table);
