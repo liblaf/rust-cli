@@ -4,8 +4,10 @@ mod now;
 
 use clap::{Parser, Subcommand};
 use clap_verbosity_flag::Verbosity;
-use cli::log::{DefaultLevel, LogInit};
-use concolor_clap::ColorChoice;
+use cli::{
+    color::ColorInit,
+    log::{DefaultLevel, LogInit},
+};
 
 #[derive(Parser)]
 #[clap(color = concolor_clap::color_choice())]
@@ -27,17 +29,7 @@ enum SubCmd {
 
 impl Cmd {
     pub async fn run(&self) -> anyhow::Result<()> {
-        match self.color.color {
-            ColorChoice::Auto => colored::control::unset_override(),
-            ColorChoice::Always => {
-                colored::control::set_override(true);
-                console::set_colors_enabled(true);
-            }
-            ColorChoice::Never => {
-                colored::control::set_override(false);
-                console::set_colors_enabled(false);
-            }
-        }
+        self.color.init();
         self.verbose.init();
         match &self.cmd {
             SubCmd::Ip(cmd) => cmd.run().await,
