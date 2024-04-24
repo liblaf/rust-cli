@@ -1,23 +1,21 @@
 [dependencies]
-chrono = { features = ["serde"], version = "0.4.38" }
 cli = { path = "../cli" }
-futures = "0.3.30"
-indicatif = "0.17.8"
-once_cell = "1.19.0"
-phf = { features = ["macros"], version = "0.11.2" }
-serde_json = "1.0.116"
-tabled = { features = ["ansi"], version = "0.15.0" }
-url = { features = ["serde"], version = "2.5.0" }
 anyhow.workspace = true
+chrono.workspace = true
 clap.workspace = true
 clap-verbosity-flag.workspace = true
 colored.workspace = true
 concolor-clap.workspace = true
 console.workspace = true
+indicatif.workspace = true
+once_cell.workspace = true
 reqwest.workspace = true
 serde.workspace = true
+serde_json.workspace = true
+tabled.workspace = true
 tokio.workspace = true
 tracing.workspace = true
+url.workspace = true
 
 [package]
 name = "gfw"
