@@ -2,13 +2,14 @@
 api = { path = "../../lib/api" }
 cli = { path = "../../lib/cli" }
 directories = "5.0.1"
+ipnet = "2.9.0"
 anyhow.workspace = true
 clap.workspace = true
 clap-verbosity-flag.workspace = true
 colored.workspace = true
 concolor-clap.workspace = true
+local-ip-address.workspace = true
 once_cell.workspace = true
-pnet.workspace = true
 tabled.workspace = true
 tokio.workspace = true
 tracing.workspace = true

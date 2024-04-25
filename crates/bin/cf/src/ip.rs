@@ -3,14 +3,18 @@ use std::{
     str::FromStr,
 };
 
+use ipnet::Ipv6Net;
 use once_cell::sync::Lazy;
-use pnet::ipnetwork::Ipv6Network;
 
 pub fn get_local_ips() -> Vec<IpAddr> {
-    pnet::datalink::interfaces()
-        .iter()
-        .flat_map(|iface| iface.ips.iter().map(|network| network.ip()))
-        .collect()
+    let mut ips = vec![];
+    if let Ok(ip) = local_ip_address::local_ip() {
+        ips.push(ip);
+    }
+    if let Ok(ip) = local_ip_address::local_ipv6() {
+        ips.push(ip);
+    }
+    ips
 }
 
 pub fn is_global_ip(ip: &IpAddr) -> bool {
@@ -37,21 +41,21 @@ pub fn is_private_ip(ip: &IpAddr) -> bool {
 }
 
 pub fn is_private_ipv6(ip: &Ipv6Addr) -> bool {
-    static IPV4_PRIVATE_NETWORK: Lazy<Vec<Ipv6Network>> = Lazy::new(|| {
+    static IPV6_PRIVATE_NETWORK: Lazy<Vec<Ipv6Net>> = Lazy::new(|| {
         vec![
-            Ipv6Network::from_str("::1/128").unwrap(),
-            Ipv6Network::from_str("::/128").unwrap(),
-            Ipv6Network::from_str("::ffff:0:0/96").unwrap(),
-            Ipv6Network::from_str("100::/64").unwrap(),
-            Ipv6Network::from_str("2001::/23").unwrap(),
-            Ipv6Network::from_str("2001:2::/48").unwrap(),
-            Ipv6Network::from_str("2001:db8::/32").unwrap(),
-            Ipv6Network::from_str("2001:10::/28").unwrap(),
-            Ipv6Network::from_str("fc00::/7").unwrap(),
-            Ipv6Network::from_str("fe80::/10").unwrap(),
+            Ipv6Net::from_str("::1/128").unwrap(),
+            Ipv6Net::from_str("::/128").unwrap(),
+            Ipv6Net::from_str("::ffff:0:0/96").unwrap(),
+            Ipv6Net::from_str("100::/64").unwrap(),
+            Ipv6Net::from_str("2001::/23").unwrap(),
+            Ipv6Net::from_str("2001:2::/48").unwrap(),
+            Ipv6Net::from_str("2001:db8::/32").unwrap(),
+            Ipv6Net::from_str("2001:10::/28").unwrap(),
+            Ipv6Net::from_str("fc00::/7").unwrap(),
+            Ipv6Net::from_str("fe80::/10").unwrap(),
         ]
     });
-    IPV4_PRIVATE_NETWORK
+    IPV6_PRIVATE_NETWORK
         .iter()
-        .any(|network| network.contains(ip.to_owned()))
+        .any(|network| network.contains(ip))
 }
