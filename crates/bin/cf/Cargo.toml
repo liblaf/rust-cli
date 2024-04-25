@@ -1,0 +1,20 @@
+[dependencies]
+api = { path = "../../lib/api" }
+cli = { path = "../../lib/cli" }
+directories = "5.0.1"
+anyhow.workspace = true
+clap.workspace = true
+clap-verbosity-flag.workspace = true
+colored.workspace = true
+concolor-clap.workspace = true
+once_cell.workspace = true
+pnet.workspace = true
+tabled.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+whoami.workspace = true
+
+[package]
+name = "cf"
+edition.workspace = true
+version.workspace = true

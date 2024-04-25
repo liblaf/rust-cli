@@ -1,0 +1,17 @@
+[dependencies]
+clap-markdown = "0.1.3"
+clap_complete = "4.5.2"
+anyhow.workspace = true
+clap.workspace = true
+clap-verbosity-flag.workspace = true
+colored.workspace = true
+concolor-clap.workspace = true
+console.workspace = true
+shadow-rs.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[package]
+name = "cli"
+edition.workspace = true
+version.workspace = true

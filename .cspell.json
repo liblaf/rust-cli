@@ -4,12 +4,18 @@
     "choco",
     "commitizen",
     "coreutils",
+    "ddns",
+    "iface",
     "indicatif",
+    "ipnetwork",
     "ipsb",
     "liblaf",
     "nointeraction",
+    "pnet",
     "serde",
-    "swatinem"
+    "swatinem",
+    "taplo",
+    "telepush"
   ],
   "ignorePaths": ["**/*-lock.*", "**/*.lock", "**/.cspell.json"],
   "allowCompoundWords": true
