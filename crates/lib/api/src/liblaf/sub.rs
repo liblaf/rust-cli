@@ -31,7 +31,7 @@ pub struct UserInfo {
     pub upload: Option<u64>,
     pub download: Option<u64>,
     pub total: Option<u64>,
-    #[serde(with = "chrono::serde::ts_seconds_option")]
+    #[serde(default, with = "chrono::serde::ts_seconds_option")]
     pub expire: Option<DateTime<Utc>>,
 }
 

@@ -1,7 +1,7 @@
 use clap::Parser;
 
-mod args;
 mod cmd;
+mod config;
 mod fmt;
 mod ip;
 

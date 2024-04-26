@@ -1,5 +1,3 @@
-use std::borrow::Cow;
-
 use anyhow::Result;
 use chrono::{DateTime, Local, Utc};
 use clap::Args;
@@ -9,6 +7,8 @@ use reqwest::Url;
 use tabled::builder::Builder;
 use tabled::settings::object::Columns;
 use tabled::settings::{Alignment, Color, Style};
+
+use crate::config::Config;
 
 #[derive(Args)]
 pub struct Cmd {
@@ -22,12 +22,9 @@ pub struct Cmd {
 
 impl Cmd {
     pub async fn run(&self) -> Result<()> {
+        let config = Config::load()?;
         let info_list = if self.urls.is_empty() {
-            let uuid = if let Some(uuid) = &self.uuid {
-                Cow::Borrowed(uuid)
-            } else {
-                Cow::Owned(api::bw::get::notes("MY_UUID").await?)
-            };
+            let uuid = config.uuid(self.uuid.as_deref())?;
             api::liblaf::sub::info_by_uuid(&uuid).await?
         } else {
             api::liblaf::sub::info_by_urls(&self.urls).await?

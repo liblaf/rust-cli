@@ -1,4 +1,3 @@
-pub mod bw;
 pub mod clash;
 pub mod cloudflare;
 pub mod ipsb;

@@ -25,30 +25,24 @@ impl Records {
     ) -> anyhow::Result<Record> {
         let request = self
             .cloudflare
-            .client
-            .post(format!(
-                "{}/zones/{}/dns_records",
-                self.cloudflare.api, zone_id
-            ))
+            .post(format!("/zones/{}/dns_records", zone_id))
             .json(params);
         let response = self.cloudflare.send::<Record>(request).await?;
         Ok(response)
     }
 
     pub async fn list(&self, zone_id: &str) -> anyhow::Result<Vec<Record>> {
-        let request = self.cloudflare.client.get(format!(
-            "{}/zones/{}/dns_records",
-            self.cloudflare.api, zone_id
-        ));
+        let request = self
+            .cloudflare
+            .get(format!("/zones/{}/dns_records", zone_id));
         let response = self.cloudflare.send::<Vec<Record>>(request).await?;
         Ok(response)
     }
 
     pub async fn delete(&self, dns_record_id: &str, zone_id: &str) -> anyhow::Result<()> {
-        let request = self.cloudflare.client.delete(format!(
-            "{}/zones/{}/dns_records/{}",
-            self.cloudflare.api, zone_id, dns_record_id
-        ));
+        let request = self
+            .cloudflare
+            .delete(format!("/zones/{}/dns_records/{}", zone_id, dns_record_id));
         self.cloudflare.send::<Value>(request).await?;
         Ok(())
     }

@@ -7,6 +7,7 @@ clap.workspace = true
 clap-verbosity-flag.workspace = true
 colored.workspace = true
 concolor-clap.workspace = true
+confy.workspace = true
 console.workspace = true
 indicatif.workspace = true
 once_cell.workspace = true

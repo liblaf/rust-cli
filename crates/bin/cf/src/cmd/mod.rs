@@ -8,16 +8,11 @@ use cli::{
 };
 
 #[derive(Parser)]
+#[command(version, author)]
 pub struct Cmd {
     #[command(subcommand)]
     cmd: SubCmd,
-    #[arg(
-        long,
-        default_value = "https://api.cloudflare.com/client/v4",
-        global(true)
-    )]
-    api_url: String,
-    #[arg(long, global(true))]
+    #[arg(short, long, global(true))]
     token: Option<String>,
     #[command(flatten)]
     color: concolor_clap::Color,

@@ -10,6 +10,7 @@ use cli::{
 };
 
 #[derive(Parser)]
+#[command(version, author)]
 pub struct Cmd {
     #[command(subcommand)]
     cmd: SubCmd,

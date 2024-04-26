@@ -1,23 +1,20 @@
+mod constants;
 pub mod dns;
 
-use std::fmt::Debug;
+use std::fmt::{Debug, Display};
 
 use reqwest::{header::HeaderMap, ClientBuilder, RequestBuilder};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
-pub const API: &str = "https://api.cloudflare.com/client/v4";
-
 #[derive(Clone)]
 pub struct Cloudflare {
-    api: String,
     client: reqwest::Client,
     token: String,
 }
 
 impl Cloudflare {
-    pub fn new(api: Option<&str>, token: &str) -> Self {
+    pub fn new(token: &str) -> Self {
         Self {
-            api: api.unwrap_or(API).to_string(),
             client: ClientBuilder::new()
                 .default_headers({
                     let mut headers = HeaderMap::new();
@@ -31,6 +28,18 @@ impl Cloudflare {
                 .unwrap(),
             token: token.to_string(),
         }
+    }
+
+    pub fn get(&self, path: impl Display) -> RequestBuilder {
+        self.client.get(format!("{}/{}", constants::API, path))
+    }
+
+    pub fn post(&self, path: impl Display) -> RequestBuilder {
+        self.client.post(format!("{}/{}", constants::API, path))
+    }
+
+    pub fn delete(&self, path: impl Display) -> RequestBuilder {
+        self.client.delete(format!("{}/{}", constants::API, path))
     }
 
     pub async fn send<T>(&self, request: RequestBuilder) -> anyhow::Result<T>

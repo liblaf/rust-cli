@@ -8,13 +8,8 @@ use clap::{Args, Subcommand};
 pub struct Cmd {
     #[command(subcommand)]
     cmd: SubCmd,
-    #[arg(
-        short,
-        long,
-        default_value = "919b04037636d3b4bbc0af135eaccdfa",
-        global(true)
-    )]
-    zone_id: String,
+    #[arg(short, long, global(true))]
+    zone_id: Option<String>,
 }
 
 #[derive(Subcommand)]

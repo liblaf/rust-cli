@@ -1,4 +1,5 @@
 mod cmd;
+mod config;
 
 use crate::cmd::Cmd;
 use clap::Parser;
