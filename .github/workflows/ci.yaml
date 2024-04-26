@@ -55,7 +55,7 @@ jobs:
       - name: Create GitHub Release
         uses: liblaf/repo/.github/actions/release@main
         with:
-          tag: latest
+          tag: dev
           files: dist/*
           pre-release: true
           recreate: true
