@@ -5,6 +5,8 @@ use serde::{Deserialize, Serialize};
 #[serde(default)]
 pub struct Config {
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub chat_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub domain: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub token: Option<String>,
@@ -15,6 +17,7 @@ pub struct Config {
 impl Default for Config {
     fn default() -> Self {
         Self {
+            chat_id: None,
             domain: Some(default_domain()),
             token: None,
             zone_id: None,
@@ -32,11 +35,19 @@ impl Config {
         Ok(config)
     }
 
+    pub fn chat_id<'a>(&self, chat_id: impl Into<Option<&'a str>>) -> Option<String> {
+        if let Some(chat_id) = chat_id.into() {
+            Some(chat_id.to_string())
+        } else {
+            self.chat_id.as_deref().map(|chat_id| chat_id.to_string())
+        }
+    }
+
     pub fn domain<'a>(&self, domain: impl Into<Option<&'a str>>) -> anyhow::Result<String> {
         if let Some(domain) = domain.into() {
-            Ok(domain.to_string())
+            Ok(domain.to_lowercase())
         } else if let Some(domain) = &self.domain {
-            Ok(domain.to_string())
+            Ok(domain.to_lowercase())
         } else {
             anyhow::bail!("missing required argument: domain")
         }

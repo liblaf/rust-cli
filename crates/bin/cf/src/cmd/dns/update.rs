@@ -13,8 +13,8 @@ pub struct Cmd {
     token: Option<String>,
     #[arg(from_global)]
     zone_id: Option<String>,
-    #[arg(long)]
-    telepush_token: Option<String>,
+    #[arg(short, long)]
+    chat_id: Option<String>,
 }
 
 impl Cmd {
@@ -53,7 +53,7 @@ impl Cmd {
             .filter(|ip| !remote_records.iter().any(|r| r.content == ip.to_string()))
             .collect();
         for record in &to_delete {
-            client.delete(&zone_id, &record.id).await?;
+            client.delete(&record.id, &zone_id).await?;
             tracing::info!(
                 addr = record.content,
                 name = record.name,
@@ -80,18 +80,34 @@ impl Cmd {
             tracing::info!(addr = ?ip, name = name, "create DNS record");
         }
         if !(to_delete.is_empty() && to_create.is_empty()) {
-            if let Some(token) = self.telepush_token.as_deref() {
-                let mut message = format!("*Domain*: {}", name);
-                for record in to_keep {
-                    message += &format!("\n- *KEEP* {}", record.content);
-                }
-                for record in to_delete {
-                    message += &format!("\n- *DELETE* ~{}~", record.content);
-                }
-                for ip in to_create {
-                    message += &format!("\n- *CREATE* *{}*", ip);
-                }
-                api::telepush::plain(token, message).await?;
+            if let Some(chat_id) = config.chat_id(self.chat_id.as_deref()) {
+                api::liblaf::send::dns(
+                    &chat_id,
+                    &api::liblaf::send::Body {
+                        create: to_create
+                            .iter()
+                            .map(|ip| api::liblaf::send::DnsRecord {
+                                name: name.to_string(),
+                                content: ip.to_string(),
+                            })
+                            .collect(),
+                        delete: to_delete
+                            .iter()
+                            .map(|r| api::liblaf::send::DnsRecord {
+                                name: name.to_string(),
+                                content: r.content.to_string(),
+                            })
+                            .collect(),
+                        keep: to_keep
+                            .iter()
+                            .map(|r| api::liblaf::send::DnsRecord {
+                                name: name.to_string(),
+                                content: r.content.to_string(),
+                            })
+                            .collect(),
+                    },
+                )
+                .await?;
             }
         }
         Ok(())
