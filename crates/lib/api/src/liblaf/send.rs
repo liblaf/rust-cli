@@ -2,7 +2,7 @@ use reqwest::Client;
 use serde::{Deserialize, Serialize};
 
 pub async fn dns(chat_id: &str, body: &Body) -> anyhow::Result<()> {
-    let url = format!("https://api.liblaf.me/bot/send/dns/{}", chat_id);
+    let url = format!("https://api.liblaf.me/bot/send/{}/dns", chat_id);
     let client = Client::new();
     let request = client.post(url).json(body);
     let response = request.send().await?;
