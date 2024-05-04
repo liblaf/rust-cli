@@ -6,12 +6,12 @@ use std::{
 use ipnet::Ipv6Net;
 use once_cell::sync::Lazy;
 
-pub fn get_local_ips() -> Vec<IpAddr> {
+pub async fn get_local_ips() -> Vec<IpAddr> {
     let mut ips = vec![];
-    if let Ok(ip) = local_ip_address::local_ip() {
+    if let Ok(ip) = api::ipsb::ip(4).await {
         ips.push(ip);
     }
-    if let Ok(ip) = local_ip_address::local_ipv6() {
+    if let Ok(ip) = api::ipsb::ip(6).await {
         ips.push(ip);
     }
     ips

@@ -4,8 +4,8 @@ const API_URL: &str = "https://api.ip.sb";
 const API_URL_IPV4: &str = "https://api-ipv4.ip.sb";
 const API_URL_IPV6: &str = "https://api-ipv6.ip.sb";
 
-pub async fn ip(version: Option<i8>) -> anyhow::Result<IpAddr> {
-    let api_url = match version {
+pub async fn ip(version: impl Into<Option<i8>>) -> anyhow::Result<IpAddr> {
+    let api_url = match version.into() {
         Some(4) => API_URL_IPV4,
         Some(6) => API_URL_IPV6,
         None => API_URL,

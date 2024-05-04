@@ -23,7 +23,7 @@ impl Cmd {
         let name = config.domain(self.domain.as_deref())?;
         let token = config.token(self.token.as_deref())?;
         let zone_id = config.zone_id(self.zone_id.as_deref())?;
-        let local_ips = crate::ip::get_local_ips();
+        let local_ips = crate::ip::get_local_ips().await;
         let local_ips: HashSet<_> = local_ips
             .into_iter()
             .filter(crate::ip::is_global_ip)
