@@ -8,10 +8,10 @@ use once_cell::sync::Lazy;
 
 pub async fn get_local_ips() -> Vec<IpAddr> {
     let mut ips = vec![];
-    if let Ok(ip) = api::ipsb::ip(4).await {
+    if let Ok(ip) = api::ipsb::ip_no_proxy(4).await {
         ips.push(ip);
     }
-    if let Ok(ip) = api::ipsb::ip(6).await {
+    if let Ok(ip) = api::ipsb::ip_no_proxy(6).await {
         ips.push(ip);
     }
     ips
