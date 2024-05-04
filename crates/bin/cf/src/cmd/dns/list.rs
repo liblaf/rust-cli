@@ -19,7 +19,6 @@ impl Cmd {
         let domain = config.domain(self.domain.as_deref())?;
         let token = config.token(self.token.as_deref())?;
         let zone_id = config.zone_id(self.zone_id.as_deref())?;
-        dbg!(&token);
 
         let client = Cloudflare::new(&token);
         let client = client.dns().records();
