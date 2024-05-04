@@ -10,12 +10,11 @@
     "ipnet",
     "ipsb",
     "liblaf",
-    "nointeraction",
     "serde",
     "swatinem",
     "taplo",
     "telepush"
   ],
-  "ignorePaths": ["**/*-lock.*", "**/*.lock", "**/.cspell.json"],
+  "ignorePaths": ["**/*-lock.*", "**/*.lock*", "**/.cspell.json"],
   "allowCompoundWords": true
 }

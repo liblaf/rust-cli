@@ -1,30 +1,19 @@
 use std::{net::IpAddr, str::FromStr};
 
-use reqwest::ClientBuilder;
+use reqwest::Client;
 
 const API_URL: &str = "https://api.ip.sb";
 const API_URL_IPV4: &str = "https://api-ipv4.ip.sb";
 const API_URL_IPV6: &str = "https://api-ipv6.ip.sb";
 
-pub async fn ip<V>(version: V) -> anyhow::Result<IpAddr>
+pub async fn ip<C, V>(client: C, version: V) -> anyhow::Result<IpAddr>
 where
+    C: Into<Option<Client>>,
     V: Into<Option<i8>>,
 {
     let api_url = get_api_url(version);
     let url = format!("{api_url}/ip");
-    let response = reqwest::get(url).await?;
-    let response = response.error_for_status()?;
-    let response = response.text().await?;
-    Ok(IpAddr::from_str(response.trim())?)
-}
-
-pub async fn ip_no_proxy<V>(version: V) -> anyhow::Result<IpAddr>
-where
-    V: Into<Option<i8>>,
-{
-    let api_url = get_api_url(version);
-    let url = format!("{api_url}/ip");
-    let client = ClientBuilder::new().no_proxy().build()?;
+    let client = client.into().unwrap_or_else(Client::new);
     let response = client.get(url).send().await?;
     let response = response.error_for_status()?;
     let response = response.text().await?;

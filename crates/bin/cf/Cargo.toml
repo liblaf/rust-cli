@@ -16,6 +16,7 @@ tabled.workspace = true
 tokio.workspace = true
 tracing.workspace = true
 whoami.workspace = true
+reqwest.workspace = true
 
 [package]
 name = "cf"

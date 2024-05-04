@@ -215,6 +215,7 @@ dependencies = [
  "ipnet",
  "local-ip-address",
  "once_cell",
+ "reqwest",
  "serde",
  "tabled",
  "tokio",
