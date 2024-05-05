@@ -51,7 +51,7 @@ async fn get(
     let addr = if let Some(addr) = addr {
         addr
     } else {
-        api::ipsb::ip(None, version).await?
+        api::ipsb::ip(version).await?
     };
     let info = api::liblaf::ip::info(addr, geo, risk, security).await?;
     Ok(info)

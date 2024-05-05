@@ -4,18 +4,15 @@ use std::{
 };
 
 use ipnet::Ipv6Net;
+use network_interface::{NetworkInterface, NetworkInterfaceConfig};
 use once_cell::sync::Lazy;
-use reqwest::Client;
 
-pub async fn get_local_ips() -> Vec<IpAddr> {
-    let mut ips = vec![];
-    let client = Client::builder().no_proxy().build().unwrap();
-    if let Ok(ip) = api::ipsb::ip(client.clone(), 4).await {
-        ips.push(ip);
-    }
-    if let Ok(ip) = api::ipsb::ip(client.clone(), 6).await {
-        ips.push(ip);
-    }
+pub async fn local_ips() -> Vec<IpAddr> {
+    let ips = NetworkInterface::show()
+        .unwrap()
+        .iter()
+        .flat_map(|interface| interface.addr.iter().map(|addr| addr.ip()))
+        .collect::<Vec<_>>();
     ips
 }
 

@@ -9,14 +9,14 @@ concolor-clap.workspace = true
 confy.workspace = true
 directories.workspace = true
 ipnet.workspace = true
-local-ip-address.workspace = true
+network-interface.workspace = true
 once_cell.workspace = true
+reqwest.workspace = true
 serde.workspace = true
 tabled.workspace = true
 tokio.workspace = true
 tracing.workspace = true
 whoami.workspace = true
-reqwest.workspace = true
 
 [package]
 name = "cf"
