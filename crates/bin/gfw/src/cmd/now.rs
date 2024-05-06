@@ -25,9 +25,17 @@ impl Cmd {
         let mut proxy = proxies.get(PROXY_NAME).unwrap();
         let mut history = proxy.history.first();
         while proxy.type_ == "Selector" || proxy.type_ == "URLTest" {
-            proxy = proxies.get(proxy.now.as_deref().unwrap()).unwrap();
-            if let Some(h) = proxy.history.first() {
-                history = Some(h);
+            if let Some(name) = proxy.now.as_deref() {
+                if let Some(now) = proxies.get(name) {
+                    proxy = now;
+                    if let Some(h) = proxy.history.first() {
+                        history = Some(h);
+                    }
+                } else {
+                    break;
+                }
+            } else {
+                break;
             }
         }
         let delay = if self.delay {
