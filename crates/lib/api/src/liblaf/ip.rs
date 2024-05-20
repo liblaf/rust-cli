@@ -23,7 +23,7 @@ pub struct IpInfo {
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct Geo {
-    pub asn: u16,
+    pub asn: u32,
     pub country: String,
     pub country_code: String,
     pub country_flag: String,
