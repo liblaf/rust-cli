@@ -65,8 +65,14 @@ impl Cmd {
                     } else {
                         colored::Color::Red
                     };
-                    let format_bytes = |bytes: u64| -> String {
-                        HumanBytes(bytes).to_string().color(color_bytes).to_string()
+                    let format_bytes = |bytes: i64| -> String {
+                        if bytes < 0 {
+                            "-".to_string() + &HumanBytes(-bytes as u64).to_string()
+                        } else {
+                            HumanBytes(bytes as u64).to_string()
+                        }
+                        .color(color_bytes)
+                        .to_string()
                     };
                     let format_date = |date: DateTime<Utc>| -> String {
                         date.with_timezone(&Local)
@@ -77,11 +83,11 @@ impl Cmd {
                     };
                     table.push_record([
                         &info.name,
-                        &format_bytes(upload),
-                        &format_bytes(download),
-                        &format_bytes(usage),
-                        &format_bytes(total - usage),
-                        &format_bytes(total),
+                        &format_bytes(upload as i64),
+                        &format_bytes(download as i64),
+                        &format_bytes(usage as i64),
+                        &format_bytes(total as i64 - usage as i64),
+                        &format_bytes(total as i64),
                         &format_date(expire),
                     ])
                 }
