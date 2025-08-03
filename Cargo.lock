@@ -474,7 +474,7 @@ checksum = "97369cbbc041bc366949bc74d34658d6cda5621039731c6310521892a3a20ae0"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
 ]
 
 [[package]]
@@ -932,7 +932,7 @@ checksum = "1ec89e9337638ecdc08744df490b221a7399bf8d164eb52a665454e60e075ad6"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
 ]
 
 [[package]]
@@ -1678,9 +1678,9 @@ dependencies = [
 
 [[package]]
 name = "shadow-rs"
-version = "0.38.0"
+version = "0.38.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "69d433b5df1e1958a668457ebe4a9c5b7bcfe844f4eb2276ac43cf273baddd54"
+checksum = "6ec14cc798c29f4bf74a6c4299c657c04d4e9fba03875c1f0eec569af03aed89"
 dependencies = [
  "const_format",
  "git2",
@@ -1795,7 +1795,7 @@ checksum = "c8af7666ab7b6390ab78131fb5b0fce11d6b7a6951602017c35fa82800708971"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
 ]
 
 [[package]]
@@ -2662,7 +2662,7 @@ checksum = "28cc31741b18cb6f1d5ff12f5b7523e3d6eb0852bbbad19d73905511d9849b95"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
  "synstructure",
 ]
 
@@ -2683,7 +2683,7 @@ checksum = "0ea7b4a3637ea8669cedf0f1fd5c286a17f3de97b8dd5a70a6c167a1730e63a5"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
  "synstructure",
 ]
 
@@ -2712,5 +2712,5 @@ checksum = "6eafa6dfb17584ea3e2bd6e76e0cc15ad7af12b09abdd1ca55961bed9b1063c6"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
 ]
