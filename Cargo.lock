@@ -377,7 +377,7 @@ checksum = "45b1f4c00870f07dc34adcac82bb6a72cc5aabca8536ba1797e01df51d2ce9a0"
 dependencies = [
  "directories",
  "serde",
- "thiserror",
+ "thiserror 1.0.59",
  "toml",
 ]
 
@@ -474,7 +474,7 @@ checksum = "97369cbbc041bc366949bc74d34658d6cda5621039731c6310521892a3a20ae0"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
 ]
 
 [[package]]
@@ -932,7 +932,7 @@ checksum = "1ec89e9337638ecdc08744df490b221a7399bf8d164eb52a665454e60e075ad6"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
 ]
 
 [[package]]
@@ -1168,13 +1168,13 @@ dependencies = [
 
 [[package]]
 name = "network-interface"
-version = "2.0.0"
+version = "2.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "433419f898328beca4f2c6c73a1b52540658d92b0a99f0269330457e0fd998d5"
+checksum = "862f41f1276e7148fb597fc55ed8666423bebe045199a1298c3515a73ec5cdd9"
 dependencies = [
  "cc",
  "libc",
- "thiserror",
+ "thiserror 2.0.12",
  "winapi",
 ]
 
@@ -1459,7 +1459,7 @@ checksum = "bd283d9651eeda4b2a83a43c1c91b266c40fd76ecd39a50a8c630ae69dc72891"
 dependencies = [
  "getrandom",
  "libredox",
- "thiserror",
+ "thiserror 1.0.59",
 ]
 
 [[package]]
@@ -1795,7 +1795,7 @@ checksum = "c8af7666ab7b6390ab78131fb5b0fce11d6b7a6951602017c35fa82800708971"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
 ]
 
 [[package]]
@@ -1862,7 +1862,16 @@ version = "1.0.59"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f0126ad08bff79f29fc3ae6a55cc72352056dfff61e3ff8bb7129476d44b23aa"
 dependencies = [
- "thiserror-impl",
+ "thiserror-impl 1.0.59",
+]
+
+[[package]]
+name = "thiserror"
+version = "2.0.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "567b8a2dae586314f7be2a752ec7474332959c6460e02bde30d702a66d488708"
+dependencies = [
+ "thiserror-impl 2.0.12",
 ]
 
 [[package]]
@@ -1870,6 +1879,17 @@ name = "thiserror-impl"
 version = "1.0.59"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d1cd413b5d558b4c5bf3680e324a6fa5014e7b7c067a51e69dbdf47eb7148b66"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.100",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "2.0.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f7cf42b4507d8ea322120659672cf1b9dbb93f8f2d4ecfd6e51350ff5b17a1d"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2662,7 +2682,7 @@ checksum = "28cc31741b18cb6f1d5ff12f5b7523e3d6eb0852bbbad19d73905511d9849b95"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
  "synstructure",
 ]
 
@@ -2683,7 +2703,7 @@ checksum = "0ea7b4a3637ea8669cedf0f1fd5c286a17f3de97b8dd5a70a6c167a1730e63a5"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
  "synstructure",
 ]
 
@@ -2712,5 +2732,5 @@ checksum = "6eafa6dfb17584ea3e2bd6e76e0cc15ad7af12b09abdd1ca55961bed9b1063c6"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.60",
+ "syn 2.0.100",
 ]
