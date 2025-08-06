@@ -20,7 +20,7 @@ reqwest = { features = ["json"], version = "0.12.4" }
 serde = { features = ["derive"], version = "1.0.200" }
 serde_json = "1.0.116"
 shadow-rs = "0.38.0"
-tabled = { features = ["ansi"], version = "0.16.0" }
+tabled = { features = ["ansi"], version = "0.20.0" }
 tokio = { features = ["full"], version = "1.37.0" }
 tracing = "0.1.40"
 tracing-subscriber = "0.3.18"
